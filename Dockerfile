@@ -21,11 +21,10 @@ RUN apt-get update -y && apt upgrade -y \
     && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/default.key -out /etc/nginx/ssl/default.crt \
     -subj "/C=FR/ST=France/L=Lyon/O=42Lyon/OU=42Network/CN=localhost/emailAddress=dgascon@student.42lyon.fr" \
     && chown -R www-data:www-data /var/www/html/wordpress \
-    && chown -R www-data:www-data /var/www/html/phpmyadmin 
+    && chown -R www-data:www-data /var/www/html/phpmyadmin \
+    && ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
 
 COPY srcs/. /
-
-RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
 
 EXPOSE 80 443
 
