@@ -24,8 +24,10 @@ RUN apt-get update -y && apt upgrade -y \
     && chown -R www-data:www-data /var/www/html/phpmyadmin \
     && ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
 
+ENV AUTOINDEX="on"
+
 COPY srcs/. /
 
 EXPOSE 80 443
 
-CMD service mysql restart && service php7.3-fpm start && nginx -g 'daemon off;'
+CMD /bin/bash /etc/nginx/sites-available/index.sh && service mysql restart && service php7.3-fpm start && nginx -g 'daemon off;'
