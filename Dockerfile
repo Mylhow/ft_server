@@ -10,8 +10,8 @@ RUN apt-get update -y && apt upgrade -y \
     && sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" \
     && service mysql start \
     && echo "CREATE DATABASE wpdb;" | mysql \
-    && echo "CREATE USER 'wpuser'@'localhost' identified by 'dbpassword';" | mysql \
-    && echo "GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser'@'localhost';" | mysql \
+    && echo "CREATE USER 'user42'@'localhost' identified by 'user42';" | mysql \
+    && echo "GRANT ALL PRIVILEGES ON wpdb.* TO 'user42'@'localhost';" | mysql \
     && echo "FLUSH PRIVILEGES;" | mysql \
     && wget -O wordpress.tar.gz "https://wordpress.org/latest.tar.gz" \
     && wget -O phpmyadmin.tar.gz "https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz" \
