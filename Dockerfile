@@ -24,7 +24,7 @@ RUN apt-get update -y && apt upgrade -y \
     && chown -R www-data:www-data /var/www/html/phpmyadmin \
     && ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
 
-ENV AUTOINDEX="on"
+ENV AUTOINDEX="off"
 
 COPY srcs/. /
 
