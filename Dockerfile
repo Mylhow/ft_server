@@ -19,14 +19,15 @@ RUN apt-get update -y && apt upgrade -y \
     && mv phpMyAdmin-5.0.2-all-languages phpmyadmin \
     && mkdir /etc/nginx/ssl \
     && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/default.key -out /etc/nginx/ssl/default.crt \
-    -subj "/C=FR/ST=France/L=Lyon/O=42Lyon/OU=42Network/CN=localhost/emailAddress=dgascon@student.42lyon.fr" \
-    && chown -R www-data:www-data /var/www/html/wordpress \
-    && chown -R www-data:www-data /var/www/html/phpmyadmin \
-    && ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
+    -subj "/C=FR/ST=France/L=Lyon/O=42Lyon/OU=42Network/CN=localhost/emailAddress=dgascon@student.42lyon.fr"
 
 ENV AUTOINDEX="off"
 
 COPY srcs/. /
+
+RUN chmod 444 /var/www/html/phpmyadmin/config.inc.php \
+	&& chown -R www-data:www-data /var/www/html/wordpress \
+	&& chown -R www-data:www-data /var/www/html/phpmyadmin
 
 EXPOSE 80 443
 
